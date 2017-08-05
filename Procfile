@@ -1,1 +1,1 @@
-web: gunicorn mystore.wsgi
+web: gunicorn myblog.wsgi
