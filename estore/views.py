@@ -40,7 +40,7 @@ class ProductUpdate(PermissionRequiredMixin, generic.UpdateView):
         messages.success(self.request, '產品已變更')
         return reverse('product_update', kwargs=self.kwargs)
 
-# 使用者管理的 View
+
 class UserList(PermissionRequiredMixin, generic.ListView):
     permission_required = 'auth.change_user'
     model = User
