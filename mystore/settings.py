@@ -26,7 +26,7 @@ SECRET_KEY = 'x@fr$^$8(&rfgj)!4098#9ama)0_2ztiip7x2ac(r*!qa1nq2u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'yulichiu.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'yulistore.herokuapp.com']
 
 
 # Application definition
