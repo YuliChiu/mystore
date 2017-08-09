@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Group, User
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import generic
 
@@ -8,6 +9,11 @@ from .models import Product
 
 
 # Create your views here.
+
+
+class CartDetailFromRequest(generic.DetailView):
+    def get_object(self):
+        return self.request.cart
 
 
 class ProductList(PermissionRequiredMixin, generic.ListView):
@@ -42,6 +48,18 @@ class ProductUpdate(PermissionRequiredMixin, generic.UpdateView):
     def get_success_url(self):
         messages.success(self.request, '產品已變更')
         return reverse('dashboard_product_update', kwargs=self.kwargs)
+
+
+class ProductAddToCart(generic.DetailView):
+    model = Product
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.request.cart.items.add(self.object)
+
+        messages.success(self.request, '已加入購物車')
+        return redirect('product_detail', pk=self.object.id)
 
 
 class UserList(PermissionRequiredMixin, generic.ListView):
